@@ -14,6 +14,14 @@ import Home from "../Pages/Home/Home";
           path: "/",
           element: <Home></Home>,
         },
+        {
+          path: "/login",
+          element: <Home></Home>,
+        },
+        {
+          path: "/signup",
+          element: <Home></Home>,
+        },
       ],
     },
   ]);
