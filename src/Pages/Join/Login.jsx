@@ -60,8 +60,8 @@ const Login = () => {
     }
 
     return (
-        <div className=" text-my-blue bg-neutral-50 mx-auto md:w-1/2 shadow-xl py-5">
-            <h2 className="text-3xl font my-10 text-center">Please Login</h2>
+        <div className=" text-my-blue bg-purple-50 mx-auto md:w-1/2 shadow-xl py-5">
+            <h2 className="text-3xl font-semibold my-10 text-center">Please Login</h2>
             <form onSubmit={handleLogin} className=" w-full md:w-3/4 lg:w-1/2 mx-auto">
                 <div className="form-control">
                     <label className="label">

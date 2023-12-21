@@ -13,7 +13,6 @@ const SignUp = () => {
         e.preventDefault();
         const form = e.target;
         const name =form.name.value;
-        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
@@ -38,9 +37,9 @@ const SignUp = () => {
             .then(result => {
                 console.log(result.user)
 
-                const user = { email , name , photo };
+                const user = { email , name };
 
-                fetch('', {
+                fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -81,20 +80,14 @@ const SignUp = () => {
 
     return (
         <div>
-            <div className=" text-my-blue bg-neutral-50 mx-auto md:w-1/2 shadow-xl py-5">
-                <h2 className="text-3xl my-10 text-center">Please Sign Up</h2>
+            <div className=" text-my-blue bg-purple-50 mx-auto md:w-1/2 shadow-xl py-5">
+                <h2 className="text-3xl font-semibold my-10 text-center">Please Sign Up</h2>
                 <form onSubmit={handleSignUp} className=" md:w-3/4 lg:w-1/2 mx-auto">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>
                         </label>
                         <input type="text" name="name" placeholder="name..." className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Photo URL</span>
-                        </label>
-                        <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">
