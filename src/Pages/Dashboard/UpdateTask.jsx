@@ -1,35 +1,25 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
-
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import Swal from "sweetalert2";
-import UseTasks from "../../Hooks/UseTasks";
 import { useForm } from "react-hook-form";
+// import useAxiosPublic from "../../Hooks/UseAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useLoaderData } from "react-router-dom";
+import { useContext,} from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+// import DatePicker from "react-date-picker";
 
-const AddTask = () => {
 
+const UpdateTask = () => {
 
+    const {task, description, date, priority, _id} = useLoaderData();
+    // const [datee, setDatee] = useState(null);
     const { user } = useContext(AuthContext);
-    console.log(user)
-
-    const axiosSecure = useAxiosSecure();
-    const [, refetch] = UseTasks();
     const { register, handleSubmit } = useForm();
-
+    // const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const onSubmit = async (data) => {
-        event.preventDefault();
-
-        const form = event.target;
-        const task = form.task.value;
-        const description = form.description.value;
-        const date = form.date.value;
-        const priority = form.priority.value;
-        const status = 'todo'
-        console.log(task , description , date , priority)
-
+        console.log(data)
+   
         if (user && user.email) {
             const taskItem = {
                 email: user.email,
@@ -37,33 +27,29 @@ const AddTask = () => {
                 description: data.description,
                 date: data.date,
                 priority: data.priority,
-                status,
             }
 
-            axiosSecure.post('/tasks', taskItem)
-                .then(res => {
-                    console.log(res.data)
-                    if (res.data.insertedId) {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "added to your task",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        
-                       refetch();
-                    }
-
-                })
+            const taskRes = await axiosSecure.patch(`/tasks/${_id}`, taskItem);
+            console.log(taskRes.data)
+            if(taskRes.data.modifiedCount > 0){
+                // show success popup
+                // reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${task} is updated.`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
         }
-
     }
+    
 
 
     return (
         <div>
-            <div>
+        <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full my-6">
                     <label className="label">
@@ -71,7 +57,7 @@ const AddTask = () => {
                     </label>
                     <input
                         type="text"
-                      
+                        defaultValue={task}
                         placeholder="Task Name"
                         {...register('task', { required: true })}
                         required
@@ -83,7 +69,7 @@ const AddTask = () => {
                         <label className="label">
                             <span className="label-text">Priority*</span>
                         </label>
-                        <select  {...register('priority', { required: true })}
+                        <select defaultValue={priority} {...register('priority', { required: true })}
                             className="select select-bordered w-full">
                             <option value="Low">Low</option>
                                 <option value="Medium">Moderate</option>
@@ -98,7 +84,9 @@ const AddTask = () => {
                         </label>
                         
                         <input
-                            type="date"      
+                            type="date"
+                            defaultValue={date}
+                            
                             {...register('date', { required: true })}
                             />
                     </div>
@@ -110,7 +98,7 @@ const AddTask = () => {
                     <label className="label">
                         <span className="label-text">Description</span>
                     </label>
-                    <textarea {...register('description')} className="textarea textarea-bordered h-24" placeholder="description"></textarea>
+                    <textarea defaultValue={description} {...register('description')} className="textarea textarea-bordered h-24" placeholder="description"></textarea>
                 </div>
 
 
@@ -121,8 +109,8 @@ const AddTask = () => {
                 </div>
             </form>
         </div>
-        </div>
+    </div>
     );
 };
 
-export default AddTask;
+export default UpdateTask;

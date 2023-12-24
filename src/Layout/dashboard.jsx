@@ -1,7 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaPlusCircle, FaRegFileAlt, FaUserAlt } from "react-icons/fa";
+import UseTasks from "../Hooks/UseTasks";
 
 const Dashboard = () => {
+
+    const [task] = UseTasks()
+
     return (
         <div className="">
             <div className=" navbar bg-purple-200">
@@ -19,18 +23,19 @@ const Dashboard = () => {
                                 Home</NavLink>
                         </li>
 
-                        <li>
+                        <li className="indicator">
                             <NavLink to="/dashboard/tasks">
-                                <FaRegFileAlt />
-                                Tasks</NavLink>
+                                <FaRegFileAlt />Task<span className="indicator-item m-2 text-white">{task.length}</span>
+                                </NavLink>
                         </li>
+
 
                         <li>
                             <NavLink to="/dashboard/addtasks">
                                 <FaPlusCircle />
                                 Add a task</NavLink>
                         </li>
-                        
+
 
                         <li>
                             <NavLink to="/dashboard/profile">
