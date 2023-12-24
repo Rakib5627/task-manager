@@ -116,7 +116,7 @@ const AddTask = () => {
 
                 <div className="text-center mt-5">
                 <button className="btn bg-purple-400 hover:bg-purple-700">
-                    Update Task
+                    Add Task
                 </button>
                 </div>
             </form>

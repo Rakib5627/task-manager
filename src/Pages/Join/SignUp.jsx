@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 
 const SignUp = () => {
 
-    const { createUser , signInWithGoogle } = useContext(AuthContext)
+    const { createUser } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -39,7 +40,7 @@ const SignUp = () => {
 
                 const user = { email , name };
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://task-manager-server-mivils5xl-rakib5627.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -67,16 +68,7 @@ const SignUp = () => {
             })
     }
 
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-            .then(result => {
-                console.log(result.user)
-                navigate(location?.state ? location.state : '/');
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
+
 
     return (
         <div>
@@ -89,6 +81,7 @@ const SignUp = () => {
                         </label>
                         <input type="text" name="name" placeholder="name..." className="input input-bordered" required />
                     </div>
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
@@ -110,7 +103,7 @@ const SignUp = () => {
                 </form>
                 <p className="text-center mt-4">Already have an account? <Link className="text-blue-600 font-bold" to="/login">Login Here</Link></p>
                 <div className="border border-x-1 opacity-20"></div>
-                <p className="mt-4 text-center"><button onClick={handleGoogleSignIn} className="btn btn-ghost">Sign in with Google</button></p>
+               <SocialLogin></SocialLogin>
             </div>
         </div>
     );

@@ -2,9 +2,18 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaPlusCircle, FaRegFileAlt, FaUserAlt } from "react-icons/fa";
 import UseTasks from "../Hooks/UseTasks";
 
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+
 const Dashboard = () => {
 
-    const [task] = UseTasks()
+    const [task] = UseTasks();
+
+
+    const { user } = useContext(AuthContext);
+   
+    console.log(task)
+
 
     return (
         <div className="">
@@ -12,7 +21,12 @@ const Dashboard = () => {
 
 
                 <div className="navbar-start">
-                    <p>User Dashboard</p>
+                    {user.photoURL ? (
+                        <img src={user.photoURL} alt="Image 1" className=" h-10" />
+                    ) : (
+                        <FaUserAlt></FaUserAlt>
+                    )}
+                    <p className=" mx-2 text-2xl font-semibold">{user.displayName}</p>
                 </div>
 
                 <div className="navbar-end">
@@ -26,7 +40,7 @@ const Dashboard = () => {
                         <li className="indicator">
                             <NavLink to="/dashboard/tasks">
                                 <FaRegFileAlt />Task<span className="indicator-item m-2 text-white">{task.length}</span>
-                                </NavLink>
+                            </NavLink>
                         </li>
 
 
@@ -36,12 +50,6 @@ const Dashboard = () => {
                                 Add a task</NavLink>
                         </li>
 
-
-                        <li>
-                            <NavLink to="/dashboard/profile">
-                                Profile<FaUserAlt />
-                            </NavLink>
-                        </li>
 
                     </ul>
                 </div>

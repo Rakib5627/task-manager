@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 
 
 const Login = () => {
-    const { signIn, signInWithGoogle } = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -48,16 +49,7 @@ const Login = () => {
     }
 
 
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-            .then(result => {
-                console.log(result.user)
-                navigate(location?.state ? location.state : '/');
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
+
 
     return (
         <div className=" text-my-blue bg-purple-50 mx-auto md:w-1/2 shadow-xl py-5">
@@ -79,9 +71,9 @@ const Login = () => {
                     <button className="btn bg-my-pink hover:bg-my-red">Login</button>
                 </div>
             </form>
-            <p className="text-center my-4">Do not have an account <Link className="text-blue-600 font-bold" to="/register">Register</Link></p>
+            <p className="text-center my-4">Do not have an account <Link className="text-blue-600 font-bold" to="/signup">Register</Link></p>
             <div className="border border-x-1 opacity-20"></div>
-            <p className="mt-4 text-center"><button onClick={handleGoogleSignIn} className="btn btn-ghost">Sign in with Google</button></p>
+             <SocialLogin></SocialLogin>
         </div>
     );
 };

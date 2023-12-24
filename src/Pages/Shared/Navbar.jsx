@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import logo from "../../assets/task.svg"
 
 
 const Navbar = () => {
@@ -35,6 +36,7 @@ const Navbar = () => {
         <div className="navbar  max-w-screen-xl bg-purple-100 rounded-b-lg">
 
             <div className="navbar-start">
+                <img src={logo} alt="" className="w-8 h-8" />
                 <Link className="normal-case text-lg md:text-3xl font-semibold">TASK MANAGER</Link>
             </div>
 

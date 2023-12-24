@@ -12,7 +12,7 @@ const Tasks = () => {
 
 
     const [tasks, refetch] = UseTasks();
-    console.log(tasks)
+    // console.log(tasks)
     const axiosSecure = useAxiosSecure();
 
     // const [ characters1, updatecharacters1] = useState(tasks);

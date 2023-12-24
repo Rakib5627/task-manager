@@ -11,6 +11,7 @@ import Tasks from "../Pages/Dashboard/Tasks";
 import AddTask from "../Pages/Dashboard/AddTask";
 import PrivateRoute from "./PrivateRoute";
 import UpdateTask from "../Pages/Dashboard/UpdateTask";
+import ContactUs from "../Pages/Home/ContactUs";
 
   export const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ import UpdateTask from "../Pages/Dashboard/UpdateTask";
           element: <Login></Login> ,
         },
         {
+          path: "/contactUs",
+          element: <ContactUs></ContactUs> ,
+        },
+        {
           path: "/signup",
           element: <SignUp></SignUp> ,
         },
@@ -35,6 +40,7 @@ import UpdateTask from "../Pages/Dashboard/UpdateTask";
     {
       path: "dashboard",
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+     
       children: [
         {
           path: "profile",
@@ -51,7 +57,7 @@ import UpdateTask from "../Pages/Dashboard/UpdateTask";
         {
           path: 'updateTask/:id',
           element: <UpdateTask></UpdateTask>,
-          loader: ({params}) => fetch(`http://localhost:5000/tasks/${params.id}`)
+          loader: ({params}) => fetch(`https://task-manager-server-mivils5xl-rakib5627.vercel.app/tasks/${params.id}`)
         },
        
       ],

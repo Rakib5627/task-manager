@@ -1,9 +1,15 @@
+import { useLoaderData } from "react-router-dom";
+
 
 
 const Profile = () => {
+  
+    const user = useLoaderData();
+    console.log(user)
+  
     return (
         <div>
-            p
+            
         </div>
     );
 };
