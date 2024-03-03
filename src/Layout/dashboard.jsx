@@ -1,9 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaHome, FaPlusCircle, FaRegFileAlt, FaUserAlt } from "react-icons/fa";
-import UseTasks from "../Hooks/UseTasks";
-
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import UseTasks from "../Hooks/UseTasks";
 
 const Dashboard = () => {
 
@@ -12,7 +11,7 @@ const Dashboard = () => {
 
     const { user } = useContext(AuthContext);
    
-    console.log(task)
+    // console.log(task)
 
 
     return (

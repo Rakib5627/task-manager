@@ -5,7 +5,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Join/Login";
 import SignUp from "../Pages/Join/SignUp";
-import Dashboard from "../Layout/dashboard";
+import Dashboard from "../Layout/Dashboard";
 import Profile from "../Pages/Dashboard/Profile";
 import Tasks from "../Pages/Dashboard/Tasks";
 import AddTask from "../Pages/Dashboard/AddTask";
@@ -57,7 +57,7 @@ import ContactUs from "../Pages/Home/ContactUs";
         {
           path: 'updateTask/:id',
           element: <UpdateTask></UpdateTask>,
-          loader: ({params}) => fetch(`https://task-manager-server-mivils5xl-rakib5627.vercel.app/tasks/${params.id}`)
+          loader: ({params}) => fetch(`https://task-manager-server-gold.vercel.app/tasks/${params.id}`)
         },
        
       ],

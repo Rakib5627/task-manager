@@ -7,15 +7,15 @@ import useAxiosSecure from "./useAxiosSecure";
 const UseTasks = () => {
     const axiosSecure = useAxiosSecure();
     const { user} = useContext(AuthContext)
-    const { refetch, data: tasks = [] } = useQuery({
-        queryKey: ['tasks', user?.email],
+    const { refetch, data: task = [] } = useQuery({
+        queryKey: ['task', user?.email],
         queryFn: async() => {
-            const res = await axiosSecure.get(`/tasks?email=${user.email}`);
+            const res = await axiosSecure.get(`/task?email=${user.email}`);
             return res.data;
         }
     })
 
-    return [tasks, refetch]
+    return [task, refetch]
 };
 
 export default UseTasks;

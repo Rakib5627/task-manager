@@ -40,7 +40,7 @@ const SignUp = () => {
 
                 const user = { email , name };
 
-                fetch('https://task-manager-server-mivils5xl-rakib5627.vercel.app/users', {
+                fetch('https://task-manager-server-gold.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
